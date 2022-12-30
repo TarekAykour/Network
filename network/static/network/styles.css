@@ -1,0 +1,96 @@
+#posts-page {
+    width: 50%;
+    margin: auto;
+  
+    height: 100%;
+}
+
+#post-form {
+    margin-top:24px;
+    width: 50%;
+    margin: auto;
+    display: grid;
+ 
+}
+
+#post-form h2 {
+    font-weight: 600;
+    font-size: 32px;
+}
+
+form {
+    margin-top: 15px;
+}
+
+
+
+
+#message {
+    width: 100%;
+    resize: none;
+    border: none;
+    border-bottom: solid 1px gray;
+    transition: border-bottom .2s;
+}
+
+#message:focus {
+    outline: none;
+    border-bottom: solid 5px rgb(0, 119, 255);
+    box-shadow: 1px 1px 3px rgb(196, 196, 196);
+    transition: all .2s ;
+}
+
+#posts-page input {
+    float: right;
+    width: 100px;
+   
+}
+
+/* post */
+.open {
+    display: block;
+}
+.post  {
+    width: 75%;
+    margin-bottom: 5%;
+    border-bottom: solid 1px gray;
+}
+
+.profile-post {
+    width: 50%;
+    margin: auto;
+    margin-top: 5%;
+}
+
+
+
+.closed {
+    display: none;
+}
+
+.underline {
+    width: 50%;
+    height: 1px;
+    background: rgb(173, 173, 173);
+    margin-bottom: 15%;
+}
+
+/* likes */
+
+.heart {
+    font-size: 24px;
+    cursor: pointer;
+    transition: font-size .3s ease;
+    
+}
+
+
+
+.heart:hover {
+    font-size: 20px;
+    transition: font-size .3s ease;
+}
+
+.liked {
+    color: red;
+}

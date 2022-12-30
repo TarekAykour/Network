@@ -1,0 +1,40 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+
+  <div id="posts profile-post">
+    <h3>Posts from your following</h3>
+    {% for post in page_obj%}
+        <div class="post" name='{{post.id}}'>
+            <div><a href="{% url 'profile' id=post.user.id %}"><h2>{{post.user}}</h2></a> <span>{{post.date}}</span></div>
+            <p>{{post.message}}</p>
+            <p><span class='heart' name='{{post.id}}'>&#9825;</span><span class='likes'>{{post.likes.count}}</span></p>
+            {% if post.user == request.user %}
+            
+            {% else %}
+            {% endif %}
+        </div>
+    {% endfor %}
+<div class="pagination" aria-labe="Page navigation example">
+    <span class="step-links pagination justify-content-center">
+        {% if page_obj.has_previous %}
+            <a class="page-link" href="?page=1">&laquo; first</a>
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        {% for page in pages %}
+            {% if page == 0 %}
+            {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+            {% endif %}
+       {% endfor %}
+
+        {% if page_obj.has_next %}
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">next</a>
+            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+</div>
+
+{% endblock %}

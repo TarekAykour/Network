@@ -1,0 +1,70 @@
+{% extends "network/layout.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+
+  <div id="profile">
+    <div>
+        <i class='fas fa-user-alt'></i>
+        {{ user }}
+    </div>
+    <div id="info">
+        {{ followers.count }} followers
+        {{ following.count }} following
+    </div>
+    {% if user.is_authenticated %}
+      {% if user == request.user or not user.is_authenticated %}
+      {% else %}
+        {% if request.user in followers %}
+        <form action="{% url 'unfollow' id=user.id %}" method="post">
+          {% csrf_token %}
+          <input class="btn btn-danger" type="submit" value="unFollow">   
+        </form>
+        {% else %}
+          <form action="{% url 'follow' id=user.id %}" method="post">
+            {% csrf_token %}
+            <input class="btn btn-outline-primary" type="submit" value="Follow">   
+          </form>
+        {% endif %}
+      {% endif %}
+    {% else %}
+    {% endif %}
+ 
+
+
+  </div>
+   
+  <div class="posts profile-post">
+    {% for post in page_obj%}
+        <div class="post open" name='{{post.id}}'>
+            <div><a href="{% url 'profile' id=post.user.id %}"><h2>{{post.user}}</h2></a> <span>{{post.date}}</span></div>
+            <p class='msg'>{{post.message}}</p>
+            <p><span class='heart' name='{{post.id}}'>&#9825;</span><span class='likes'>{{post.likes.count}}</span></p>
+            {% if post.user == request.user %}
+                <button class='edit btn btn-primary' name='{{post.id}}'>Edit</button>
+            {% else %}
+            {% endif %}
+        </div>
+    {% endfor %}
+<div class="pagination" aria-labe="Page navigation example">
+    <span class="step-links pagination justify-content-center">
+        {% if page_obj.has_previous %}
+            <a class="page-link" href="?page=1">&laquo; first</a>
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        {% for page in pages %}
+            {% if page == 0 %}
+            {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+            {% endif %}
+       {% endfor %}
+
+        {% if page_obj.has_next %}
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">next</a>
+            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+</div>
+
+{% endblock %}
