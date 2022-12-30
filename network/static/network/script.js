@@ -4,6 +4,26 @@ const editBtn=document.querySelectorAll('.edit');
 const posts = document.querySelectorAll('.post')
 const likeBtn = document.querySelectorAll('.heart')
 const user = document.querySelector('#currentuser').innerHTML
+const bars = document.querySelector('.fa-bars');
+const nav = document.querySelector('.nav');
+
+
+
+// nav
+bars.addEventListener('click', ()=> {
+    if(nav.classList.contains('nav-closed')){
+        nav.classList.remove('nav-closed');
+        nav.classList.add('nav-open');
+    }
+    else {
+        nav.classList.remove('nav-open');
+        nav.classList.add('nav-closed');
+    }
+})
+
+
+
+
 
 // editing
 editBtn.forEach(btn => {

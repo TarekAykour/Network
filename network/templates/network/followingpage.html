@@ -1,9 +1,9 @@
 {% extends "network/layout.html" %}
 
 {% block body %}
-
+<h3>Posts from your following</h3>
   <div id="posts profile-post">
-    <h3>Posts from your following</h3>
+    
     {% for post in page_obj%}
         <div class="post" name='{{post.id}}'>
             <div><a href="{% url 'profile' id=post.user.id %}"><h2>{{post.user}}</h2></a> <span>{{post.date}}</span></div>

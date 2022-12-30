@@ -14,7 +14,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
-
+@login_required(login_url='/login')
 def index(request):
     posts = Post.objects.all().order_by('-date')
     paginator = Paginator(posts,10)
@@ -56,7 +56,7 @@ def login_view(request):
     else:
         return render(request, "network/login.html")
 
-
+@login_required(login_url='/login')
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse("index"))
@@ -89,7 +89,7 @@ def register(request):
         return render(request, "network/register.html")
 
 
-
+@login_required(login_url='/login')
 def profile(request,id):
     user = User.objects.get(id=id)
     followers = user.following.all()
